@@ -7,16 +7,20 @@ import 'prismjs/components/prism-javascript';
 import './prism.scss';
 import styles from './styles.module.scss';
 import {cleanCode} from './util';
+import { useDispatch } from 'react-redux';
+import {addLog} from '../../actions/logs';
 let timeout;
-const CodeEditor = ({code, log, defaultArgs, onEnd})=>{
+const CodeEditor = ({code, defaultArgs})=>{
   const [currentCode, setCurrentCode] = useState(code);
+  const dispatch = useDispatch();
   const sendLog = (line, ...data)=> {
     let baseLog = '';
     if(line) {
       baseLog = `line: ${line}`;
     }
     console.log(baseLog, data);
-    log({line, output: data, response: !line});
+    // log({line, output: data, response: !line});
+    dispatch(addLog({line, output: data, response: !line}));
   }
   const execCode = () => {
     clearTimeout(timeout);
@@ -25,7 +29,7 @@ const CodeEditor = ({code, log, defaultArgs, onEnd})=>{
       console.log(cleanedCode);
       try {
         let evalResp = eval(cleanedCode);
-        onEnd(evalResp)
+        dispatch(addLog({output:evalResp, time: new Date().toISOString()}));
       } catch (e) {
         console.error(e);
       }
