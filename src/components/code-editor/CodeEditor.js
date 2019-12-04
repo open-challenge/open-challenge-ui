@@ -11,7 +11,7 @@ import { consoleContext } from '../../contexts';
 
 let timeout;
 const CodeEditor = ({ code, defaultArgs }) => {
-  const { logs, newLog } = useContext(consoleContext);
+  const { newLog } = useContext(consoleContext);
 
   const [currentCode, setCurrentCode] = useState(code);
   const sendLog = (line, ...data) => {
