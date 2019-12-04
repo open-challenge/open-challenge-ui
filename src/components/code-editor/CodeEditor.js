@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs/components/prism-core';
@@ -6,66 +6,67 @@ import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-javascript';
 import './prism.scss';
 import styles from './styles.module.scss';
-import {cleanCode} from './util';
-import { useDispatch } from 'react-redux';
-import {addLog} from '../../actions/logs';
+import { cleanCode } from './util';
+import { consoleContext } from '../../contexts';
+
 let timeout;
-const CodeEditor = ({code, defaultArgs})=>{
+const CodeEditor = ({ code, defaultArgs }) => {
+  const { logs, newLog } = useContext(consoleContext);
+
   const [currentCode, setCurrentCode] = useState(code);
-  const dispatch = useDispatch();
-  const sendLog = (line, ...data)=> {
+  const sendLog = (line, ...data) => {
     let baseLog = '';
-    if(line) {
+    if (line) {
       baseLog = `line: ${line}`;
     }
     console.log(baseLog, data);
-    // log({line, output: data, response: !line});
-    dispatch(addLog({line, output: data, response: !line}));
-  }
+    newLog({ line, output: data, response: !line });
+  };
   const execCode = () => {
     clearTimeout(timeout);
-    timeout = setTimeout(()=>{
+    timeout = setTimeout(() => {
       const cleanedCode = cleanCode(currentCode, 'sendLog', defaultArgs);
-      console.log(cleanedCode);
       try {
-        let evalResp = eval(cleanedCode);
-        dispatch(addLog({output:evalResp, time: new Date().toISOString()}));
+        const evalResp = eval(cleanedCode);
+        newLog({ output: evalResp, time: new Date().toISOString() });
       } catch (e) {
         console.error(e);
       }
-    },1000);
-  }
-  const onChange = (newCode)=>{
+    }, 1000);
+  };
+  const onChange = newCode => {
     setCurrentCode(newCode);
-  }
-  useEffect(()=>{
+  };
+  useEffect(() => {
     execCode();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[currentCode])
+  }, [currentCode]);
 
-  return <div>
-    <Editor
-           value={currentCode}
-           onValueChange={newCode => onChange(newCode)}
-           highlight={code => highlight(code, languages.js)}
-           padding={10}
-           className={styles.editor}
-         />
-  </div>;
-}
+  return (
+    <div>
+      <Editor
+        value={currentCode}
+        onValueChange={newCode => onChange(newCode)}
+        highlight={code => highlight(code, languages.js)}
+        padding={10}
+        className={styles.editor}
+      />
+    </div>
+  );
+};
 
 CodeEditor.propTypes = {
   code: PropTypes.string,
   log: PropTypes.func,
   onEnd: PropTypes.func,
-  defaultArgs: PropTypes.array,
+  defaultArgs: PropTypes.array
 };
 
 CodeEditor.defaultProps = {
-    code: '',
-    log: ()=>{},
-    onEnd: ()=>{},
-    defaultArgs: []
+  code: '',
+  log: () => {},
+  onEnd: () => {},
+  defaultArgs: []
 };
 
 export default CodeEditor;
