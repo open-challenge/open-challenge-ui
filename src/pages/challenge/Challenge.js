@@ -4,13 +4,7 @@ import CodeEditor from '../../components/code-editor';
 import Console from '../../components/console';
 import Nav from '../../components/nav';
 import { useParams } from 'react-router-dom';
-const code = `
-function test(a, b){
-  return Math.round((a+b) / 2);
-}
-`;
 
-const dataset = [3, 6];
 const Challenge = () => {
   const { id } = useParams();
   return (
@@ -18,7 +12,7 @@ const Challenge = () => {
       <Nav />
       <div className={styles['col-container']}>
         <div className={styles.column}>
-          <CodeEditor id={id} code={code} defaultArgs={dataset} />
+          <CodeEditor id={id} />
         </div>
         <div className={styles.column}>
           <div className={styles.area}>

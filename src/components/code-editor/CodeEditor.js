@@ -11,10 +11,12 @@ import { consoleContext, codeContext } from '../../contexts';
 import { getChallenge, updateChallenge } from '../../services/challenge';
 
 let timeout;
-const CodeEditor = ({ defaultArgs, id }) => {
+const CodeEditor = ({ id }) => {
   const { newLog } = useContext(consoleContext);
-  const { code, updateCode } = useContext(codeContext);
-  const [currentCode, setCurrentCode] = useState('');
+  const { code, defaultArgs, updateCode, setDefaultArgs } = useContext(
+    codeContext
+  );
+  const [currentCode, setCurrentCode] = useState(code);
   const sendLog = (line, ...data) => {
     let baseLog = '';
     if (line) {
@@ -47,8 +49,9 @@ const CodeEditor = ({ defaultArgs, id }) => {
     getChallenge(id).then(challenge => {
       updateCode(challenge.code);
       setCurrentCode(challenge.code);
+      setDefaultArgs(challenge.datasets[0].dataset);
     });
-  }, [id, updateCode]);
+  }, [id, setDefaultArgs, updateCode]);
   return (
     <div>
       <Editor

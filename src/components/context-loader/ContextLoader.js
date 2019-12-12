@@ -8,7 +8,14 @@ const ContextLoader = ({ children }) => {
   });
   const [code, setCode] = useState({
     code: '',
-    updateCode: updatedCode => setCode(code => ({ ...code, code: updatedCode }))
+    dataset: [],
+    defaultArgs: [],
+    updateCode: updatedCode =>
+      setCode(code => ({ ...code, code: updatedCode })),
+    setDataset: newDataset =>
+      setCode(code => ({ ...code, dataset: newDataset })),
+    setDefaultArgs: newDefaultArgs =>
+      setCode(code => ({ ...code, defaultArgs: newDefaultArgs }))
   });
   return (
     <consoleContext.Provider value={logs}>
