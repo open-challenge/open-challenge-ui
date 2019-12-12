@@ -9,7 +9,7 @@ function App() {
     <Router>
       <ContextLoader>
         <Switch>
-          <Route path="/challenge">
+          <Route path="/challenge/:id">
             <Challenge />
           </Route>
           <Route path="/">

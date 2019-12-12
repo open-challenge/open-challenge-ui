@@ -2,13 +2,15 @@ module.exports = {
   root: true,
   env: {
     "browser": true,
+    "node": true
   },
   parser: "babel-eslint",
   parserOptions: {
     sourceType: 'module',
     allowImportExportEverywhere: true,
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
+      node: true
     }
   },
   settings: {
