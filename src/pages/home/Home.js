@@ -1,10 +1,16 @@
 import React from 'react';
+import { PageContainer, PageContent } from '../../components/base';
+import HomeCard from '../../components/home-card';
+import Nav from '../../components/nav';
 
 const Home = () => {
   return (
-    <div>
-      <p>test</p>
-    </div>
+    <PageContainer>
+      <Nav />
+      <PageContent center={true}>
+        <HomeCard />
+      </PageContent>
+    </PageContainer>
   );
 };
 
