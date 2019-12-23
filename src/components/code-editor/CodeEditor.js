@@ -49,7 +49,8 @@ const CodeEditor = ({ id }) => {
     getChallenge(id).then(challenge => {
       updateCode(challenge.code);
       setCurrentCode(challenge.code);
-      setDefaultArgs(challenge.datasets[0].dataset);
+      const datasets = challenge.datasets;
+      setDefaultArgs(datasets.lenght > 0 ? datasets[0].dataset : null);
     });
   }, [id, setDefaultArgs, updateCode]);
   return (

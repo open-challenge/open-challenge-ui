@@ -1,0 +1,8 @@
+@import '../../../styles/colors';
+@import '../../../styles/global';
+
+.card {
+  border: $white 1px solid;
+  padding: $global-padding;
+  border-radius: 5px;
+}

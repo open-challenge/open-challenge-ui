@@ -1,0 +1,16 @@
+@import '../../../styles/colors';
+@import '../../../styles/global';
+
+.container {
+  width: 100%;
+  height: calc(100vh - #{$nav-height});
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+
+.center {
+  align-items: center;
+}
