@@ -24,3 +24,6 @@ body:{}
 * go to `/challenge/:id`
 
 Anyway you can check the routes in the code so don't be lazy.
+
+## Changelog
+check changelog [here](./docs/changelog)

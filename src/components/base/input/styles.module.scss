@@ -1,0 +1,13 @@
+@import '../../../styles/colors';
+@import '../../../styles/global';
+
+.input {
+  border: 1px solid $white;
+  border-radius: 2px;
+  background-color: $base-color;
+  color: $white;
+  font-size: 0.7em;
+  padding: $global-padding / 2;
+  margin-top: $global-margin / 2;
+  margin-bottom: $global-margin / 2;
+}
