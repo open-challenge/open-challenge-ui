@@ -3,9 +3,9 @@ import styles from './styles.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-const Button = ({ value, onClick }) => {
+const Button = ({ value, onClick, type }) => {
   return (
-    <div className={cx('button')} onClick={onClick}>
+    <div className={cx('button', type)} onClick={onClick}>
       {value}
     </div>
   );
