@@ -26,8 +26,8 @@ const HomeCard = () => {
       {!openChallenge && (
         <Card>
           <p>Select an option:</p>
-          <Button value="New challenge" onClick={onNewChallenge} />
-          <Button value="Open using code" onClick={onOpenChallenge} />
+          <Button type="primary" value="New challenge" onClick={onNewChallenge} />
+          <Button type="primary" value="Open using code" onClick={onOpenChallenge} />
         </Card>
       )}
       {openChallenge && (
