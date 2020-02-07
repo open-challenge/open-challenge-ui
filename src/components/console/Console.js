@@ -1,14 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import styles from './styles.module.scss';
 import PropTypes from 'prop-types';
+import Button from '../base/button';
 import { consoleContext } from '../../contexts';
 const Console = ({ title }) => {
   const { logs } = useContext(consoleContext);
-
+  const [currentLogs, setCurrentLogs] = useState(logs);
+  const clearConsole = setCurrentLogs(' ');
   return (
     <div className={styles.console}>
       <div className={styles.title}>
         console <div className={styles.subtitle}>-{title}</div>
+        <Button type="primary" value="New challenge" onClick={clearConsole} />
       </div>
       <div className={styles.body}>
         {logs.map((output, i) => {
