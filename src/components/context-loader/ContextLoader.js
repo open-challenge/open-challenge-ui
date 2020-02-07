@@ -4,7 +4,8 @@ const ContextLoader = ({ children }) => {
   const [logs, setLogs] = useState({
     logs: [],
     newLog: newLogLine =>
-      setLogs(logs => ({ ...logs, logs: logs.logs.concat(newLogLine) }))
+      setLogs(logs => ({ ...logs, logs: logs.logs.concat(newLogLine) })),
+    cleanLogs: () => setLogs(logs => ({ ...logs, logs: [] }))
   });
   const [code, setCode] = useState({
     code: '',
