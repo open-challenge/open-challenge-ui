@@ -12,7 +12,7 @@ const Console = ({ title }) => {
     <div className={styles.console}>
       <div className={styles.title}>
         console <div className={styles.subtitle}>-{title}</div>
-        <Button type="console" value="Clean console" onClick={clearConsole} />
+        <Button type="menu-button" value="Clean console" onClick={clearConsole} />
       </div>
       <div className={styles.body}>
         {logs.map((output, i) => {
