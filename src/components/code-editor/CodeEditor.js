@@ -9,7 +9,7 @@ import styles from './styles.module.scss';
 import { cleanCode } from './util';
 import { consoleContext, codeContext } from '../../contexts';
 import { getChallenge, updateChallenge } from '../../services/challenge';
-
+import { NavArea } from '../base';
 let timeout;
 const CodeEditor = ({ id }) => {
   const { newLog } = useContext(consoleContext);
@@ -54,7 +54,8 @@ const CodeEditor = ({ id }) => {
     });
   }, [id, setDefaultArgs, updateCode]);
   return (
-    <div>
+    <div className={styles.container}>
+      <NavArea title="Editor" />
       <Editor
         value={currentCode}
         onValueChange={newCode => onChange(newCode)}

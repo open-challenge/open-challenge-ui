@@ -7,6 +7,9 @@ export const cleanCode = (code, logReplace, args) => {
       allLines[i].replace(/console.log\(/g, `${logReplace}(${j}, `)
     );
   }
-  response.push(`test(${args.join(',')})`);
+  if (args && args?.length > 0) {
+    response.push(`test(${args.join(',')})`);
+  }
+  response.push(`test()`);
   return response.join('\n');
 };
