@@ -4,10 +4,10 @@ export const cleanCode = (code, logReplace, args) => {
   for (let i = 0; i < allLines.length; i++) {
     const j = i;
     response.push(
-      allLines[i].replace(/console.log\(/g, `${logReplace}(${j}, `)
+      allLines[i].replace(/console.log\(/g, `${logReplace}(${j}, `),
     );
   }
-  if (args && args?.length > 0) {
+  if (args?.length > 0) {
     response.push(`test(${args.join(',')})`);
   }
   response.push(`test()`);
