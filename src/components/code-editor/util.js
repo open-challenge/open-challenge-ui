@@ -4,7 +4,7 @@ export const cleanCode = (code, logReplace, args) => {
   for (let i = 0; i < allLines.length; i++) {
     const j = i;
     response.push(
-      allLines[i].replace(/console.log\(/g, `${logReplace}(${j}, `),
+      allLines[i].replace(/console.log\(/g, `${logReplace}(${j}, `)
     );
   }
   if (args?.length > 0) {

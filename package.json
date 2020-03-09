@@ -15,7 +15,9 @@
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
-    "react-simple-code-editor": "^0.10.0"
+    "react-simple-code-editor": "^0.10.0",
+    "react-simplemde-editor": "^4.1.0",
+    "showdown": "^1.9.1"
   },
   "scripts": {
     "start": "react-scripts start",

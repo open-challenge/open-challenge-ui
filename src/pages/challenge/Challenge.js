@@ -5,6 +5,7 @@ import Console from '../../components/console';
 import Nav from '../../components/nav';
 import { useParams } from 'react-router-dom';
 import { PageContainer } from '../../components/base';
+import MarkdownEditor from '../../components/markdown-editor';
 const Challenge = () => {
   const { id } = useParams();
   return (
@@ -12,7 +13,7 @@ const Challenge = () => {
       <Nav />
       <div className={styles['col-container']}>
         <div className={styles.column}>
-          <Console title="console output" />
+          <MarkdownEditor />
         </div>
         <div className={styles.column}>
           <CodeEditor id={id} />

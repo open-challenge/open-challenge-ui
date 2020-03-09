@@ -23,7 +23,7 @@
 
   .body {
     overflow: auto;
-    height: calc(100% - 30px);
+    height: calc(100% - #{$panel-nav-height});
     margin: 0 $global-margin;
   }
 }
