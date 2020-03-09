@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import * as Showdown from 'showdown';
+import { codeContext } from '../../contexts';
 import { NavArea, Button } from '../base';
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-markup';
 import 'prismjs/components/prism-markdown';
+import 'prismjs/themes/prism-funky.css';
 
 import '../code-editor/prism.scss';
-import 'prismjs/themes/prism-funky.css';
 import styles from './styles.module.scss';
 const converter = new Showdown.Converter({
   tables: true,
@@ -17,12 +18,12 @@ const converter = new Showdown.Converter({
 });
 
 const MarkdownEditor = () => {
-  const [value, setValue] = useState('**Hello world!!!**');
   const [previewEnabled, setPreviewEnabled] = useState(false);
   const [preview, setPreview] = useState('');
+  const { exercise, setExercise } = useContext(codeContext);
   const handlePreview = () => {
     setPreviewEnabled(prev => !prev);
-    const html = converter.makeHtml(value);
+    const html = converter.makeHtml(exercise);
     setPreview(html);
   };
 
@@ -33,8 +34,8 @@ const MarkdownEditor = () => {
       </NavArea>
       {!previewEnabled && (
         <Editor
-          value={value}
-          onValueChange={newCode => setValue(newCode)}
+          value={exercise}
+          onValueChange={newCode => setExercise(newCode)}
           highlight={textCode =>
             highlight(textCode, languages.markdown, 'markdown')
           }
