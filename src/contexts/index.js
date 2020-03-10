@@ -5,5 +5,6 @@ export const consoleContext = createContext({
 });
 
 export const codeContext = createContext({
-  code: ''
+  code: '',
+  exercise: ''
 });

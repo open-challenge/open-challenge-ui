@@ -7,20 +7,24 @@ const ContextLoader = ({ children }) => {
       setLogs(logs => ({ ...logs, logs: logs.logs.concat(newLogLine) })),
     cleanLogs: () => setLogs(logs => ({ ...logs, logs: [] }))
   });
-  const [code, setCode] = useState({
-    code: '',
-    dataset: [],
-    defaultArgs: [],
-    updateCode: updatedCode =>
-      setCode(code => ({ ...code, code: updatedCode })),
-    setDataset: newDataset =>
-      setCode(code => ({ ...code, dataset: newDataset })),
-    setDefaultArgs: newDefaultArgs =>
-      setCode(code => ({ ...code, defaultArgs: newDefaultArgs }))
-  });
+  const [code, setCode] = useState('');
+  const [dataset, setDataset] = useState([]);
+  const [defaultArgs, setDefaultArgs] = useState([]);
+  const [exercise, setExercise] = useState('');
+
+  const codeState = {
+    code,
+    dataset,
+    defaultArgs,
+    exercise,
+    updateCode: setCode,
+    setDataset,
+    setDefaultArgs,
+    setExercise
+  };
   return (
     <consoleContext.Provider value={logs}>
-      <codeContext.Provider value={code}>{children}</codeContext.Provider>
+      <codeContext.Provider value={codeState}>{children}</codeContext.Provider>
     </consoleContext.Provider>
   );
 };

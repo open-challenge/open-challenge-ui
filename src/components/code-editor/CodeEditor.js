@@ -9,13 +9,18 @@ import styles from './styles.module.scss';
 import { cleanCode } from './util';
 import { consoleContext, codeContext } from '../../contexts';
 import { getChallenge, updateChallenge } from '../../services/challenge';
-
+import { NavArea } from '../base';
 let timeout;
 const CodeEditor = ({ id }) => {
   const { newLog } = useContext(consoleContext);
-  const { code, defaultArgs, updateCode, setDefaultArgs } = useContext(
-    codeContext
-  );
+  const {
+    code,
+    defaultArgs,
+    updateCode,
+    setDefaultArgs,
+    setExercise,
+    exercise
+  } = useContext(codeContext);
   const [currentCode, setCurrentCode] = useState(code);
   const sendLog = (line, ...data) => {
     let baseLog = '';
@@ -30,7 +35,7 @@ const CodeEditor = ({ id }) => {
     timeout = setTimeout(() => {
       const cleanedCode = cleanCode(currentCode, 'sendLog', defaultArgs);
       try {
-        updateChallenge(id, { code: currentCode });
+        updateChallenge(id, { code: currentCode, exercise });
         const evalResp = eval(cleanedCode);
         newLog({ output: evalResp, time: new Date().toISOString() });
       } catch (e) {
@@ -44,17 +49,19 @@ const CodeEditor = ({ id }) => {
   useEffect(() => {
     execCode();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentCode]);
+  }, [currentCode, exercise]);
   useEffect(() => {
     getChallenge(id).then(challenge => {
       updateCode(challenge.code);
       setCurrentCode(challenge.code);
       const datasets = challenge.datasets;
       setDefaultArgs(datasets.length > 0 ? datasets[0].dataset : null);
+      setExercise(challenge.exercise);
     });
   }, [id, setDefaultArgs, updateCode]);
   return (
-    <div>
+    <div className={styles.container}>
+      <NavArea title="Editor" />
       <Editor
         value={currentCode}
         onValueChange={newCode => onChange(newCode)}

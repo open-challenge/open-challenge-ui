@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import styles from './styles.module.scss';
 import PropTypes from 'prop-types';
-import Button from '../base/button';
+import { Button, NavArea } from '../base';
 import { consoleContext } from '../../contexts';
 const Console = ({ title }) => {
   const { logs, cleanLogs } = useContext(consoleContext);
@@ -10,10 +10,14 @@ const Console = ({ title }) => {
   };
   return (
     <div className={styles.console}>
-      <div className={styles.title}>
-        console <div className={styles.subtitle}>-{title}</div>
-        <Button type="menu-button" value="Clean console" onClick={clearConsole} />
-      </div>
+      <NavArea title="Console" subtitle={title}>
+        <Button
+          type="menu-button"
+          value="Clean console"
+          style={styles.trash}
+          onClick={clearConsole}
+        />
+      </NavArea>
       <div className={styles.body}>
         {logs.map((output, i) => {
           return (
