@@ -4,6 +4,9 @@ import { codeContext } from '../../contexts';
 import { NavArea, Button } from '../base';
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs/components/prism-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+
 import 'prismjs/components/prism-markup';
 import 'prismjs/components/prism-markdown';
 import 'prismjs/themes/prism-funky.css';
@@ -30,7 +33,9 @@ const MarkdownEditor = () => {
   return (
     <div className={styles.editor}>
       <NavArea title="Markdown Editor">
-        <Button value="preview" onClick={handlePreview} />
+        <Button onClick={handlePreview}>
+          <FontAwesomeIcon icon={faEye} />
+        </Button>
       </NavArea>
       {!previewEnabled && (
         <Editor
