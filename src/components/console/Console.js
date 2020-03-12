@@ -1,6 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import styles from './styles.module.scss';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+
 import { Button, NavArea } from '../base';
 import { consoleContext } from '../../contexts';
 const Console = ({ title }) => {
@@ -11,12 +14,9 @@ const Console = ({ title }) => {
   return (
     <div className={styles.console}>
       <NavArea title="Console" subtitle={title}>
-        <Button
-          type="menu-button"
-          value="Clean console"
-          style={styles.trash}
-          onClick={clearConsole}
-        />
+        <Button type="menu-button" style={styles.trash} onClick={clearConsole}>
+          <FontAwesomeIcon icon={faTrashAlt} />
+        </Button>
       </NavArea>
       <div className={styles.body}>
         {logs.map((output, i) => {
