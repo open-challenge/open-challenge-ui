@@ -20,7 +20,7 @@ const converter = new Showdown.Converter({
   tasklists: true
 });
 
-const MarkdownEditor = () => {
+const MarkdownEditor = (props) => {
   const [previewEnabled, setPreviewEnabled] = useState(false);
   const [preview, setPreview] = useState('');
   const { exercise, setExercise } = useContext(codeContext);
@@ -29,6 +29,10 @@ const MarkdownEditor = () => {
     const html = converter.makeHtml(exercise);
     setPreview(html);
   };
+  var editionDisabled = false;
+  if(props.edition === 'disabled') {
+    editionDisabled= true;
+  }
 
   return (
     <div className={styles.editor}>
@@ -39,6 +43,7 @@ const MarkdownEditor = () => {
       </NavArea>
       {!previewEnabled && (
         <Editor
+          disabled={editionDisabled}
           value={exercise}
           onValueChange={newCode => setExercise(newCode)}
           highlight={textCode =>

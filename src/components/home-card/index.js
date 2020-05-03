@@ -19,7 +19,7 @@ const HomeCard = () => {
     setCode(newCode);
   };
   const redirectChallgen = () => {
-    history.push(`/challenge/${code}`);
+    history.push(`/solve/${code}`);
   };
   return (
     <>
