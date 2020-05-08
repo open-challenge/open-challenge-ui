@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Card, Button, Input } from '../base';
 import { newChallenge } from '../../services/challenge';
+import { codeContext } from '../../contexts';
+import { getChallenge } from '../../services/challenge';
+
 const HomeCard = () => {
   const history = useHistory();
   const [openChallenge, setOpenChallenge] = useState(false);
   const [code, setCode] = useState('');
+  const [mode, setMode] = useState('');
+
   const onNewChallenge = () => {
     newChallenge().then(resp => {
       history.push(`/challenge/${resp.auth.edition}`);
@@ -16,10 +21,17 @@ const HomeCard = () => {
   };
   const onChangeCode = newCode => {
     console.log('code: ', newCode);
+      getChallenge(newCode).then(challenge => {
+        setMode(challenge.mode);
+      });
     setCode(newCode);
   };
   const redirectChallgen = () => {
-    history.push(`/solve/${code}`);
+    if(mode === 'solve') {
+      history.push(`/solve/${code}`);
+    } else if (mode === 'edition') {
+      history.push(`/challenge/${code}`);
+    }
   };
   return (
     <>

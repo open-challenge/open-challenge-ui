@@ -11,16 +11,19 @@ const ContextLoader = ({ children }) => {
   const [dataset, setDataset] = useState([]);
   const [defaultArgs, setDefaultArgs] = useState([]);
   const [exercise, setExercise] = useState('');
+  const [mode, setMode] = useState('');
 
   const codeState = {
     code,
     dataset,
     defaultArgs,
     exercise,
+    mode,
     updateCode: setCode,
     setDataset,
     setDefaultArgs,
-    setExercise
+    setExercise,
+    setMode
   };
   return (
     <consoleContext.Provider value={logs}>
