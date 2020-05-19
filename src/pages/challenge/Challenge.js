@@ -13,7 +13,7 @@ const Challenge = () => {
       <Nav />
       <div className={styles['col-container']}>
         <div className={styles.column}>
-          <MarkdownEditor />
+          <MarkdownEditor disabled={false}/>
         </div>
         <div className={styles.column}>
           <CodeEditor id={id} />

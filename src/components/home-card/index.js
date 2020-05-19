@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Card, Button, Input } from '../base';
 import { newChallenge } from '../../services/challenge';
-import { codeContext } from '../../contexts';
 import { getChallenge } from '../../services/challenge';
 
 const HomeCard = () => {
@@ -20,13 +19,12 @@ const HomeCard = () => {
     setOpenChallenge(true);
   };
   const onChangeCode = newCode => {
-    console.log('code: ', newCode);
       getChallenge(newCode).then(challenge => {
         setMode(challenge.mode);
       });
     setCode(newCode);
   };
-  const redirectChallgen = () => {
+  const redirectChallenge = () => {
     if(mode === 'solve') {
       history.push(`/solve/${code}`);
     } else if (mode === 'edition') {
@@ -46,7 +44,7 @@ const HomeCard = () => {
         <Card>
           <p>Insert code:</p>
           <Input onChange={onChangeCode} />
-          <Button value="Go" onClick={redirectChallgen} />
+          <Button value="Go" onClick={redirectChallenge} />
         </Card>
       )}
     </>

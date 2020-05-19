@@ -13,7 +13,7 @@ const SolveView = () => {
       <Nav />
       <div className={styles['col-container']}>
         <div className={styles.column}>
-          <MarkdownEditor edition="disabled"/>
+          <MarkdownEditor disabled={true}/>
         </div>
         <div className={styles.column}>
           <CodeEditor id={id} />
