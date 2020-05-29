@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Card, Button, Input } from '../base';
 import { newChallenge } from '../../services/challenge';
+import { getChallenge } from '../../services/challenge';
+
 const HomeCard = () => {
   const history = useHistory();
   const [openChallenge, setOpenChallenge] = useState(false);
   const [code, setCode] = useState('');
+  const [mode, setMode] = useState('');
+
   const onNewChallenge = () => {
     newChallenge().then(resp => {
       history.push(`/challenge/${resp.auth.edition}`);
@@ -15,11 +19,17 @@ const HomeCard = () => {
     setOpenChallenge(true);
   };
   const onChangeCode = newCode => {
-    console.log('code: ', newCode);
+      getChallenge(newCode).then(challenge => {
+        setMode(challenge.mode);
+      });
     setCode(newCode);
   };
-  const redirectChallgen = () => {
-    history.push(`/challenge/${code}`);
+  const redirectChallenge = () => {
+    if(mode === 'solve') {
+      history.push(`/solve/${code}`);
+    } else if (mode === 'edition') {
+      history.push(`/challenge/${code}`);
+    }
   };
   return (
     <>
@@ -34,7 +44,7 @@ const HomeCard = () => {
         <Card>
           <p>Insert code:</p>
           <Input onChange={onChangeCode} />
-          <Button value="Go" onClick={redirectChallgen} />
+          <Button value="Go" onClick={redirectChallenge} />
         </Card>
       )}
     </>

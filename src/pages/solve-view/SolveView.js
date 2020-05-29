@@ -6,14 +6,14 @@ import Nav from '../../components/nav';
 import { useParams } from 'react-router-dom';
 import { PageContainer } from '../../components/base';
 import MarkdownEditor from '../../components/markdown-editor';
-const Challenge = () => {
+const SolveView = () => {
   const { id } = useParams();
   return (
-    <PageContainer>
+    <PageContainer >
       <Nav />
       <div className={styles['col-container']}>
         <div className={styles.column}>
-          <MarkdownEditor disabled={false}/>
+          <MarkdownEditor disabled={true}/>
         </div>
         <div className={styles.column}>
           <CodeEditor id={id} />
@@ -26,4 +26,4 @@ const Challenge = () => {
   );
 };
 
-export default Challenge;
+export default SolveView;

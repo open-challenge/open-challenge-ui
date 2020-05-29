@@ -2,6 +2,7 @@ import React from 'react';
 // import styles from './App.module.scss';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import Challenge from './pages/challenge';
+import SolveView from './pages/solve-view';
 import Home from './pages/home';
 import ContextLoader from './components/context-loader';
 function App() {
@@ -11,6 +12,9 @@ function App() {
         <Switch>
           <Route path="/challenge/:id">
             <Challenge />
+          </Route>
+          <Route path="/solve/:id">
+            <SolveView />
           </Route>
           <Route path="/">
             <Home />

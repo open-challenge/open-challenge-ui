@@ -20,7 +20,7 @@ const ContextLoader = ({ children }) => {
     updateCode: setCode,
     setDataset,
     setDefaultArgs,
-    setExercise
+    setExercise,
   };
   return (
     <consoleContext.Provider value={logs}>
